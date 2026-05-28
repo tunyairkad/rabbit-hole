@@ -248,6 +248,7 @@
     let matchedCount = 0;
     let moves = 0;
     let lock = false;
+    let winTimerId = null;
 
     const boardEl = document.getElementById("board");
     const movesEl = document.getElementById("moves");
@@ -285,6 +286,8 @@
     }
 
     function initGame() {
+      clearTimeout(winTimerId);
+      winTimerId = null;
       boardEl.innerHTML = "";
       flipped = [];
       matchedCount = 0;
@@ -333,7 +336,7 @@
         lock = false;
 
         if (matchedCount === PAIR_COUNT) {
-          setTimeout(showWin, 400);
+          winTimerId = setTimeout(showWin, 400);
         }
       } else {
         first.classList.add("shake");
